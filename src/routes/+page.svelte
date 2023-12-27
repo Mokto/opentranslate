@@ -1,4 +1,7 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+	import Button from '$components/button/button.svelte';
+</script>
 
-<h1 class="text-3xl font-bold underline text-blue-500">Hello world!</h1>
+<div class="bg-slate-400 p-4 rounded m-4">
+	<Button href="/projects">Go to projects</Button>
+</div>

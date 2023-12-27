@@ -1,4 +1,3 @@
-// import { auth } from '$lib/server/lucia';
 import { prisma } from '$lib/server/prisma.js';
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types.js';

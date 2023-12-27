@@ -1,28 +1,30 @@
 <script lang="ts">
+	import { enhance } from '$app/forms';
+	// import Input from '../../components/input/input.svelte';
 	import type { PageData } from './$types';
+	import Input from '$components/input/input.svelte';
+	import Button from '$components/button/button.svelte';
 
 	export let data: PageData;
 </script>
 
-<h1>Projects</h1>
 {#if data.projects?.length > 0}
-	<ul>
-		{#each data.projects as project}
-			<li><a href="/projects/{project.id}">{project.name}</a></li>
-		{/each}
-	</ul>
+	<div class="bg-slate-400 p-4 rounded m-4">
+		<h1 class="text-2xl">Projects</h1>
+		<ul>
+			{#each data.projects as project}
+				<li><a href="/projects/{project.id}">{project.name}</a></li>
+			{/each}
+		</ul>
+	</div>
 {/if}
 
 <hr />
 
-<form method="POST">
-	<label>
-		Project name
-		<input name="name" value="Test project" />
-	</label>
-	<label>
-		Storyblok token
-		<input name="storyblokToken" type="password" />
-	</label>
-	<button type="submit">Create a new project</button>
-</form>
+<div class="bg-slate-400 p-4 rounded m-4">
+	<form method="POST" use:enhance>
+		<Input label="Project name" placeholder="Project name" name="name" />
+		<Input label="Storyblok token" placeholder="Storyblok token" name="storyblokToken" />
+		<Button type="submit">Create a new project</Button>
+	</form>
+</div>
