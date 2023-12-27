@@ -7,22 +7,29 @@
 	export let onInput: ((e: Event) => void) | undefined = undefined;
 	export let onFocus: (() => void) | undefined = undefined;
 	export let onBlur: (() => void) | undefined = undefined;
+	let className: string | undefined = undefined;
+	export { className as class };
 </script>
 
 <div>
 	{#if label}
-		<label class="mb-2 block text-sm font-medium text-grey500" for={name}>
+		<label class="block text-sm font-medium leading-6 text-gray-900" for={name}>
 			{label}
 		</label>
 	{/if}
-	<input
-		class="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
-		{name}
-		{type}
-		{placeholder}
-		value={initialValue}
-		on:input={onInput}
-		on:blur={onBlur}
-		on:focus={onFocus}
-	/>
+	<div class="mt-2">
+		<input
+			class={`block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6 ${
+				className || ''
+			}`}
+			{name}
+			id={name}
+			{type}
+			{placeholder}
+			value={initialValue}
+			on:input={onInput}
+			on:blur={onBlur}
+			on:focus={onFocus}
+		/>
+	</div>
 </div>

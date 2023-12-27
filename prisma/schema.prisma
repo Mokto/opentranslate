@@ -50,9 +50,17 @@ model Key {
 }
 
 model Project {
+  id               Int               @id @default(autoincrement())
+  createdAt        DateTime          @default(now())
+  updatedAt        DateTime          @updatedAt
+  name             String?
+  storyblokProject StoryblokProject?
+}
+
+model StoryblokProject {
   id             Int      @id @default(autoincrement())
-  createdAt      DateTime @default(now())
-  updatedAt      DateTime @updatedAt
-  name           String?
-  storyblokToken String?
+  storyblokToken String
+  spaceId        String
+  project        Project? @relation(fields: [projectId], references: [id])
+  projectId      Int      @unique
 }

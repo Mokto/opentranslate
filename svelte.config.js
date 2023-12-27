@@ -18,6 +18,14 @@ const config = {
 			// $stores: './src/stores',
 			// $utils: './src/utils',
 		},
+		// csp: {
+		// 	directives: {
+		// 		'script-src': ['self']
+		// 	},
+		// 	reportOnly: {
+		// 		'script-src': ['self']
+		// 	}
+		// }
 	}
 };
 
