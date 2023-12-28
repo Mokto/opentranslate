@@ -54,6 +54,7 @@ model Project {
   createdAt        DateTime          @default(now())
   updatedAt        DateTime          @updatedAt
   name             String?
+  description      String?
   storyblokProject StoryblokProject?
 }
 
@@ -61,6 +62,6 @@ model StoryblokProject {
   id             Int      @id @default(autoincrement())
   storyblokToken String
   spaceId        String
-  project        Project? @relation(fields: [projectId], references: [id])
+  project        Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
   projectId      Int      @unique
 }

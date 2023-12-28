@@ -5,6 +5,7 @@
 	import Input from '$components/input/input.svelte';
 	import Button from '$components/button/button.svelte';
 	import { goto } from '$app/navigation';
+	import Textarea from '$components/input/textarea.svelte';
 
 	export let data: PageData;
 	console.log(data.project?.storyblokProject?.spaceId);
@@ -32,6 +33,13 @@
 							placeholder="Project name"
 							name="name"
 							initialValue={data.project?.name || ''}
+						/>
+						<Textarea
+							class="mb-4"
+							label="Description"
+							placeholder="Choose a description to help translating your project"
+							name="description"
+							initialValue={data.project?.description || ''}
 						/>
 						<Input
 							class="mb-4"

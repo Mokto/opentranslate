@@ -9,6 +9,7 @@ export const actions = {
 		const name = data.get('name');
 		const storyblokToken = data.get('storyblokToken');
 		const spaceId = data.get('spaceId');
+		const description = data.get('description');
 
 		if (!name?.toString() || !storyblokToken?.toString() || !spaceId?.toString()) {
 			return error(400, { message: 'Missing name or storyblok token or spaceid' });
@@ -17,6 +18,7 @@ export const actions = {
 		await prisma.project.create({
 			data: {
 				name: name.toString(),
+				description: description?.toString(),
 				storyblokProject: {
 					create: {
 						storyblokToken: storyblokToken.toString(),
@@ -34,6 +36,7 @@ export const actions = {
 		const data = await request.formData();
 		const name = data.get('name');
 		const storyblokToken = data.get('storyblokToken');
+		const description = data.get('description');
 		const spaceId = data.get('spaceId');
 
 		if (!projectId) {
@@ -48,6 +51,7 @@ export const actions = {
 			where: { id: +projectId },
 			data: {
 				name: name.toString(),
+				description: description?.toString(),
 				storyblokProject: {
 					update: {
 						storyblokToken: storyblokToken.toString(),
