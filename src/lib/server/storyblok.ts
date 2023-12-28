@@ -50,6 +50,9 @@ export const getStoryblokStories = async (config: StoryblokAPIConfig): Promise<S
 		);
 
 		const resultJson = await result.json();
+		if (resultJson.error) {
+			throw new Error(resultJson.error);
+		}
 
 		results = [...results, ...resultJson.stories];
 		page++;
@@ -72,6 +75,9 @@ export const getStoryblokComponents = async (
 	});
 
 	const resultJson = await result.json();
+	if (resultJson.error) {
+		throw new Error(resultJson.error);
+	}
 	const components: Component[] = resultJson.components;
 	return Object.fromEntries(components.map((c) => [c.real_name, c]));
 };
@@ -91,6 +97,9 @@ export const getStoryblokStory = async (
 	);
 
 	const resultJson = await result.json();
+	if (resultJson.error) {
+		throw new Error(resultJson.error);
+	}
 	return resultJson.story;
 };
 
@@ -103,6 +112,9 @@ export const getStoryblokSpace = async (config: StoryblokAPIConfig): Promise<Spa
 	});
 
 	const resultJson = await result.json();
+	if (resultJson.error) {
+		throw new Error(resultJson.error);
+	}
 	return resultJson.space;
 };
 

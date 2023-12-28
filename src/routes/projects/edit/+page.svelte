@@ -11,7 +11,6 @@
 	console.log(data.project?.storyblokProject?.spaceId);
 </script>
 
-<!-- <div class="bg-slate-400 p-4 rounded m-4"> -->
 <div class="container pt-12">
 	<form method="POST" use:enhance>
 		<div class="space-y-12">
@@ -64,14 +63,8 @@
 								type="submit">{data.project ? 'Edit the project' : 'Create a new project'}</Button
 							>
 							{#if data.project}
-								<Button
-									onClick={() => {
-										fetch(`/projects/${data.project?.id}`, { method: 'DELETE' });
-										goto(`/projects`);
-									}}
-									type="button"
-									theme="secondary"
-									size="lg">Delete</Button
+								<Button href={`/projects/${data.project?.id}/delete`} theme="secondary" size="lg"
+									>Delete</Button
 								>
 							{/if}
 						</div>

@@ -11,7 +11,6 @@ CREATE TABLE "User" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "email" TEXT NOT NULL,
     "name" TEXT,
-    "password" TEXT,
     "organizationId" INTEGER,
     CONSTRAINT "User_organizationId_fkey" FOREIGN KEY ("organizationId") REFERENCES "Organization" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 );
@@ -33,6 +32,24 @@ CREATE TABLE "Key" (
     CONSTRAINT "Key_user_id_fkey" FOREIGN KEY ("user_id") REFERENCES "User" ("id") ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+-- CreateTable
+CREATE TABLE "Project" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" DATETIME NOT NULL,
+    "name" TEXT,
+    "description" TEXT
+);
+
+-- CreateTable
+CREATE TABLE "StoryblokProject" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "storyblokToken" TEXT NOT NULL,
+    "spaceId" TEXT NOT NULL,
+    "projectId" INTEGER NOT NULL,
+    CONSTRAINT "StoryblokProject_projectId_fkey" FOREIGN KEY ("projectId") REFERENCES "Project" ("id") ON DELETE CASCADE ON UPDATE CASCADE
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "User_id_key" ON "User"("id");
 
@@ -50,3 +67,6 @@ CREATE UNIQUE INDEX "Key_id_key" ON "Key"("id");
 
 -- CreateIndex
 CREATE INDEX "Key_user_id_idx" ON "Key"("user_id");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "StoryblokProject_projectId_key" ON "StoryblokProject"("projectId");

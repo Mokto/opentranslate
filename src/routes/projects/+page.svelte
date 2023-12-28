@@ -1,8 +1,5 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
-	// import Input from '../../components/input/input.svelte';
 	import type { PageData } from './$types';
-	import Input from '$components/input/input.svelte';
 	import Button from '$components/button/button.svelte';
 
 	export let data: PageData;
