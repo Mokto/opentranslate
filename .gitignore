@@ -11,3 +11,4 @@ vite.config.ts.timestamp-*
 
 prisma/dev.db
 prisma/dev.db-journal
+cockroach-data

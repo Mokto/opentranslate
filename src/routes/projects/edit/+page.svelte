@@ -1,14 +1,11 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
-	// import Input from '../../components/input/input.svelte';
 	import type { PageData } from './$types';
 	import Input from '$components/input/input.svelte';
 	import Button from '$components/button/button.svelte';
-	import { goto } from '$app/navigation';
 	import Textarea from '$components/input/textarea.svelte';
 
 	export let data: PageData;
-	console.log(data.project?.storyblokProject?.spaceId);
 </script>
 
 <div class="container pt-12">
@@ -54,6 +51,14 @@
 							name="storyblokToken"
 							type="password"
 							initialValue={data.project?.storyblokProject?.storyblokToken}
+						/>
+						<Input
+							class="mb-4"
+							label="OpenAI API key"
+							placeholder="OpenAI API key"
+							name="openAIApiKey"
+							type="password"
+							initialValue={data.project?.openAIApiKey || ''}
 						/>
 						<div class="mt-2">
 							<Button
