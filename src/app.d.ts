@@ -3,18 +3,14 @@
 /// <reference types="lucia" />
 declare global {
 	namespace App {
-		// interface Error {}
 		interface Locals {
 			auth: import('lucia').AuthRequest;
 		}
-		// interface PageData {}
-		// interface PageState {}
-		// interface Platform {}
 	}
 	namespace Lucia {
 		type Auth = import('$lib/server/lucia').Auth;
-		type DatabaseUserAttributes = {};
-		type DatabaseSessionAttributes = {};
+		// type DatabaseUserAttributes = {};
+		// type DatabaseSessionAttributes = {};
 	}
 }
 

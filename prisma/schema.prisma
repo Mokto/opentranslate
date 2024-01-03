@@ -55,8 +55,20 @@ model Project {
   updatedAt        DateTime          @updatedAt
   name             String?
   description      String?
+  defaultLanguage  String?
+  translatedLanguages String[]
   storyblokProject StoryblokProject?
   openAIApiKey     String?
+  translationPairs TranslationPair[]
+}
+
+model TranslationPair {
+  id        String   @id @default(nanoid())
+  from      String
+  to        String
+  language        String
+  project   Project? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+  projectId String   @unique
 }
 
 model StoryblokProject {

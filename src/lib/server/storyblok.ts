@@ -1,4 +1,4 @@
-import { isRichTextEmpty } from '@storyblok/js';
+import { isRichTextEmpty, type ISbRichtext } from '@storyblok/js';
 
 export type StoryblokAPIConfig = {
 	token: string;
@@ -10,6 +10,7 @@ type Story = {
 	name: string;
 	content_type?: string;
 	full_slug: string;
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
 	content: { [key: string]: any };
 };
 
@@ -118,14 +119,22 @@ export const getStoryblokSpace = async (config: StoryblokAPIConfig): Promise<Spa
 	return resultJson.space;
 };
 
+type StoryblokTranslationValue = string | ISbRichtext;
+type GetStoryblokTranslatableFieldValuesResult = {
+	[key: string]: {
+		value: StoryblokTranslationValue;
+		i18n: { [lang: string]: StoryblokTranslationValue };
+	};
+};
+
 export const getStoryblokTranslatableFieldValues = (
 	story: Story,
 	storyType: string,
 	components: { [real_name: string]: Component },
 	space: Space,
-	currentValue: any = {},
+	currentValue: GetStoryblokTranslatableFieldValuesResult = {},
 	prefix: string = ''
-) => {
+): GetStoryblokTranslatableFieldValuesResult => {
 	Object.keys(components[storyType].schema).forEach((key) => {
 		const field = components[storyType].schema[key];
 		if (field.translatable) {
@@ -142,6 +151,7 @@ export const getStoryblokTranslatableFieldValues = (
 				};
 			}
 		} else if (field.type === 'bloks') {
+			// @ts-expect-error blok of any type
 			story.content[field.key || key].forEach((blok, index) => {
 				getStoryblokTranslatableFieldValues(
 					{ content: blok, id: 0, name: '', full_slug: '' },

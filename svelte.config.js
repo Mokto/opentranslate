@@ -1,5 +1,5 @@
-// import adapter from '@sveltejs/adapter-auto';
-import adapter from "svelte-adapter-bun";
+import adapter from '@sveltejs/adapter-auto';
+// import adapter from 'svelte-adapter-bun';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 
 /** @type {import('@sveltejs/kit').Config} */
@@ -15,9 +15,9 @@ const config = {
 		adapter: adapter(),
 		alias: {
 			$components: './src/components',
-			// $stores: './src/stores',
-			// $utils: './src/utils',
-		},
+			$stores: './src/stores',
+			$utils: './src/utils'
+		}
 		// csp: {
 		// 	directives: {
 		// 		'script-src': ['self']

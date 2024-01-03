@@ -4,6 +4,9 @@
 	import Input from '$components/input/input.svelte';
 	import Button from '$components/button/button.svelte';
 	import Textarea from '$components/input/textarea.svelte';
+	import Select from '$components/select/select.svelte';
+	import { languages } from '../../../utils/languages';
+	import MultiSelect from '$components/select/multi-select.svelte';
 
 	export let data: PageData;
 </script>
@@ -36,6 +39,24 @@
 							placeholder="Choose a description to help translating your project"
 							name="description"
 							initialValue={data.project?.description || ''}
+						/>
+						<Select
+							class="mb-4"
+							label="Default language"
+							placeholder="Language"
+							name="defaultLanguage"
+							options={languages}
+							initialValue={data.project?.defaultLanguage || ''}
+							withSearch={true}
+						/>
+						<MultiSelect
+							class="mb-4"
+							label="Alternative languages"
+							placeholder="Languages"
+							name="translatedLanguages"
+							options={languages}
+							initialValue={data.project?.translatedLanguages || []}
+							withSearch={true}
 						/>
 						<Input
 							class="mb-4"
