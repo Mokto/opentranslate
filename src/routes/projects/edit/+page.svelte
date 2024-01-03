@@ -5,8 +5,9 @@
 	import Button from '$components/button/button.svelte';
 	import Textarea from '$components/input/textarea.svelte';
 	import Select from '$components/select/select.svelte';
-	import { languages } from '../../../utils/languages';
+	import { languagesOptions } from '$utils/languages';
 	import MultiSelect from '$components/select/multi-select.svelte';
+	import Tabs from '$components/tabs/tabs.svelte';
 
 	export let data: PageData;
 </script>
@@ -26,6 +27,12 @@
 
 				<div class="grid max-w-2xl grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 md:col-span-2">
 					<div class="col-span-full">
+						<Tabs
+							tabs={[
+								{ name: 'Settings', tab: '' },
+								{ name: 'Translation pairs', tab: 'translationPairs' }
+							]}
+						/>
 						<Input
 							class="mb-4"
 							label="Project name"
@@ -45,7 +52,7 @@
 							label="Default language"
 							placeholder="Language"
 							name="defaultLanguage"
-							options={languages}
+							options={languagesOptions}
 							initialValue={data.project?.defaultLanguage || ''}
 							withSearch={true}
 						/>
@@ -54,7 +61,7 @@
 							label="Alternative languages"
 							placeholder="Languages"
 							name="translatedLanguages"
-							options={languages}
+							options={languagesOptions}
 							initialValue={data.project?.translatedLanguages || []}
 							withSearch={true}
 						/>

@@ -19,6 +19,8 @@ export const actions = {
 				name: name.toString(),
 				description: data.get('description')?.toString(),
 				openAIApiKey: data.get('openAIApiKey')?.toString(),
+				defaultLanguage: data.get('defaultLanguage')?.toString(),
+				translatedLanguages: data.get('translatedLanguages')?.toString().split(','),
 				storyblokProject: {
 					create: {
 						storyblokToken: storyblokToken.toString(),
@@ -52,6 +54,8 @@ export const actions = {
 				name: name.toString(),
 				description: data.get('description')?.toString(),
 				openAIApiKey: data.get('openAIApiKey')?.toString(),
+				defaultLanguage: data.get('defaultLanguage')?.toString(),
+				translatedLanguages: data.get('translatedLanguages')?.toString().split(','),
 				storyblokProject: {
 					update: {
 						storyblokToken: storyblokToken.toString(),
