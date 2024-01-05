@@ -2,26 +2,16 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 
-	export let tabs: { name: string; tab: string }[];
-
-	const getUrl = (tab: string) => {
-		let newUrl = new URL($page.url);
-		if (tab) {
-			newUrl.searchParams.set('tab', tab);
-		} else {
-			newUrl.searchParams.delete('tab');
-		}
-
-		return newUrl.href;
-	};
+	export let tabs: { name: string; href: string }[];
 
 	const navigate = (e: Event) => {
 		const target = e.target as HTMLSelectElement;
-		$page.url.searchParams.set('tab', target.value);
-		goto(getUrl(target.value));
+		// $page.url.searchParams.set('tab', target.value);
+		goto(target.value);
 	};
 
-	$: currentTab = $page.url.searchParams.get('tab') || '';
+	console.log($page.url);
+	// $: currentTab = $page.url.pathname.get('tab') || '';
 </script>
 
 <div class="mb-4">
@@ -34,7 +24,7 @@
 			on:change={navigate}
 		>
 			{#each tabs as tab}
-				<option selected={currentTab === tab.tab} value={tab.tab}>{tab.name}</option>
+				<option selected={$page.url.pathname === tab.href} value={tab.href}>{tab.name}</option>
 			{/each}
 		</select>
 	</div>
@@ -43,14 +33,14 @@
 			<nav class="-mb-px flex" aria-label="Tabs">
 				{#each tabs as tab}
 					<a
-						href={getUrl(tab.tab)}
+						href={tab.href}
 						class={`${
-							currentTab === tab.tab
+							$page.url.pathname === tab.href
 								? 'border-indigo-500 text-indigo-600'
 								: 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
 						} border-b-2 py-4 px-1 text-center text-sm font-medium`}
 						style={`width: calc(100% / ${tabs.length})`}
-						aria-current={currentTab === tab.tab ? 'page' : undefined}>{tab.name}</a
+						aria-current={$page.url.pathname === tab.href ? 'page' : undefined}>{tab.name}</a
 					>
 				{/each}
 			</nav>
