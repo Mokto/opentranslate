@@ -11,7 +11,11 @@
 	<Tabs
 		tabs={[
 			{ name: 'Settings', href: `/projects/${data.project?.id}/settings` },
-			{ name: 'Translation pairs', href: `/projects/${data.project?.id}/settings/translationPairs` }
+			{
+				name: 'Translation pairs',
+				href: `/projects/${data.project?.id}/settings/translationPairs/${data.project?.translatedLanguages?.[0]}`,
+				activeStartsWith: `/projects/${data.project?.id}/settings/translationPairs`
+			}
 		]}
 	/>
 	<slot />

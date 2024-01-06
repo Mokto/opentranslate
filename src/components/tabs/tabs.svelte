@@ -2,7 +2,13 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 
-	export let tabs: { name: string; href: string }[];
+	interface Tab {
+		name: string;
+		href: string;
+		activeStartsWith?: string;
+	}
+
+	export let tabs: Tab[];
 
 	const navigate = (e: Event) => {
 		const target = e.target as HTMLSelectElement;
@@ -10,8 +16,11 @@
 		goto(target.value);
 	};
 
-	console.log($page.url);
-	// $: currentTab = $page.url.pathname.get('tab') || '';
+	$: activeTab = tabs.find((tab) =>
+		tab.activeStartsWith
+			? $page.url.pathname.startsWith(tab.activeStartsWith)
+			: $page.url.pathname === tab.href
+	);
 </script>
 
 <div class="mb-4">
@@ -24,7 +33,7 @@
 			on:change={navigate}
 		>
 			{#each tabs as tab}
-				<option selected={$page.url.pathname === tab.href} value={tab.href}>{tab.name}</option>
+				<option selected={activeTab === tab} value={tab.href}>{tab.name}</option>
 			{/each}
 		</select>
 	</div>
@@ -35,12 +44,12 @@
 					<a
 						href={tab.href}
 						class={`${
-							$page.url.pathname === tab.href
+							activeTab === tab
 								? 'border-indigo-500 text-indigo-600'
 								: 'border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700'
 						} border-b-2 py-4 px-1 text-center text-sm font-medium`}
 						style={`width: calc(100% / ${tabs.length})`}
-						aria-current={$page.url.pathname === tab.href ? 'page' : undefined}>{tab.name}</a
+						aria-current={activeTab === tab ? 'page' : undefined}>{tab.name}</a
 					>
 				{/each}
 			</nav>

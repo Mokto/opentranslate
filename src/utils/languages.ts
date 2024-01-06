@@ -789,3 +789,7 @@ export const languagesOptions = languages.map((language) => ({
 	value: language.code,
 	label: language.label
 }));
+
+export const getLanguageLabel = (code: string): string | undefined => {
+	return languages.find((language) => language.code === code)?.label;
+};

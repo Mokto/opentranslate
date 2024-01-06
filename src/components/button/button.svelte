@@ -1,7 +1,7 @@
 <script lang="ts">
 	export let href: string | undefined = undefined;
 	export let onClick: (() => void) | undefined = undefined;
-	export let type: 'submit' | 'button' | undefined = undefined;
+	export let type: 'submit' | 'button' = 'button';
 	export let id: string | undefined = undefined;
 	let className: string | undefined = undefined;
 	export { className as class };

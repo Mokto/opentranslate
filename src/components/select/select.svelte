@@ -7,6 +7,7 @@
 	export let options: { label: string; value: string }[];
 	export let initialValue: string | undefined = '';
 	export let withSearch: boolean = false;
+	export let onChange: ((value: string) => void) | undefined = undefined;
 	let className: string | undefined = undefined;
 	export { className as class };
 
@@ -98,10 +99,16 @@
 						on:keypress={() => {
 							value = option.value;
 							isOpen = false;
+							if (onChange) {
+								onChange(value);
+							}
 						}}
 						on:click={() => {
 							value = option.value;
 							isOpen = false;
+							if (onChange) {
+								onChange(value);
+							}
 						}}
 					>
 						<span
